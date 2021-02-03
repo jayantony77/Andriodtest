@@ -1,0 +1,32 @@
+
+<FirstScreen>:
+    name:"firstScreen"
+    MDBoxLayout:
+        orientation:"vertical"
+        spacing: "12dp"
+     
+        MDToolbar:
+            id:Toolbar
+            title:"Matches"
+            anchor_title:"center"
+
+            pos_hint: {"top":1}
+    
+        ScrollView:
+            MDList:
+                md_bg_color:(88/255, 144/255, 146/255,1)
+                size_hint_y: None
+               
+                OneLineAvatarIconListItem:
+                    on_press:  
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'secondScreen'
+
+                    text:"CSK Vs RCB"
+                    ImageLeftWidget:
+                        source: "csk1.jpg"
+                    ImageRightWidget:
+                        source: "rcb1.jpg"       
+                    
+                    
+                    

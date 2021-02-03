@@ -1,0 +1,54 @@
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+
+#:import SecondScreen SecondScreenpy.SecondScreen
+#:import Data SecondScreenpy.Data
+#:import ScoreCardItem SecondScreenpy.ScoreCardItem
+
+
+<SecondScreen>:
+    name:"secondScreen"
+    MDBoxLayout:
+        orientation:"vertical"
+        spacing: "12dp"
+     
+        MDToolbar:
+            id:Toolbar
+            title:"Scores"
+            anchor_title:"center"
+
+            pos_hint: {"top":1}
+    
+        ScrollView:
+
+            MDList:
+                id:scorelist
+
+    MDIconButton:
+        icon:"arrow-left"
+        y: root.height - self.height / 2 - STANDARD_INCREMENT / 2 
+
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'firstScreen'
+
+<Data@MDGridLayout>
+<ScoreCardItem>
+    id:scorecarditem
+    size_hint_y:None
+    #height:"110dp"
+    #elevation:20
+    adaptive_height:True
+        
+    MDCard:
+        padding:0,0,"36dp",0
+        valign:"Top"
+
+        Widget:
+	        size_hint_x:.1
+
+        Data:
+            id:data
+            cols:6
+            size_hint_y:None      
+
+            
