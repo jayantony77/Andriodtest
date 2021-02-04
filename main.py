@@ -6,7 +6,7 @@ from kivy.uix.screenmanager import ScreenManager
 from SecondScreenpy import SecondScreen
 
 
-Window.size = (330,600)
+Window.size = (300,600)
 
 Builder.load_file("FirstScreen.kv")
 Builder.load_file("SecondScreen.kv")
