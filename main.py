@@ -1,28 +1,29 @@
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
+from kivy.core.window import Window
 from kivymd.uix.screen import MDScreen
 from kivy.uix.screenmanager import ScreenManager
+from SecondScreenpy import SecondScreen
+#from AnalyzeScreenpy import AnalyzeScreen
 from kivymd.uix.label import MDLabel
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
-from kivymd.uix.tab import MDTabsBase
-#from kivy.core.window import Window
+from kivymd.uix.tab import MDTabsBase 
+
+
 
 
 import csv
 import os
 import sys
-
+from pathlib import Path
 
 
 
 #Window.size = (300,600)
 
-Builder.load_file("FirstScreen.kv")
-Builder.load_file("AnalyzeScreen.kv")
-Builder.load_file("AnalysisScreen.kv")
-           
+
 
 class FirstScreen(MDScreen):
     pass
@@ -53,11 +54,40 @@ class General(Tab):
     pass
 
 
+
+#Builder.load_file("FirstScreen.kv") 
+#Builder.load_file("TeamScreen.kv")
+#Builder.load_file("AnalyzeScreen.kv")
+#Builder.load_file("AnalysisScreen.kv") 
+
+
+if getattr(sys, "frozen", False):  # bundle mode with PyInstaller
+    os.environ["CricPred"] = sys._MEIPASS
+else:
+    os.environ["CricPred"] = str(Path(__file__).parent)
+
+os.environ['cricpredict'] = os.path.dirname(os.path.abspath(__file__))
+
+
+print("os enviroment =====")
+#print(os.environ["CricPred"]) 
+print(os.environ['cricpredict'])
+
+KV_DIR = f"{os.path.dirname(__file__)}/kv/"
+
+for kv_file in os.listdir(KV_DIR):
+    with open(os.path.join(KV_DIR, kv_file), encoding="utf-8") as kv:
+        Builder.load_string(kv.read())
+
+
+
 class FirstScreen1(MDApp):
     def build(self):
         
         sm = ScreenManager()
         sm.add_widget(FirstScreen(name='firstScreen'))
+        sm.add_widget(TeamScreen(name='teamScreen'))
+        #sm.add_widget(SecondScreen(name='secondScreen'))
         sm.add_widget(AnalyzeScreen(name='analyzeScreen'))
                                             
          
@@ -66,7 +96,7 @@ class FirstScreen1(MDApp):
 
     def on_press(self):
 
-        print("clicking the listitems")
+        print("clicking the listitems")    
 
 class AnalyzeScreen(MDScreen):
 

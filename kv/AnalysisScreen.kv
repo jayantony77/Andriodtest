@@ -3,7 +3,7 @@
 #:import ScoreCardBowlItem  AnalysisScreen.ScoreCardBowlItem
 #:import Scores AnalysisScreen.Scores
 
-<Scores>
+<Scores> 
     BoxLayout:
         orientation: "vertical"
         padding:"10dp"
@@ -31,7 +31,8 @@
 
         MDLabel:
             id:matchlbl 
-            size: self.texture_size
+            size_hint_y: None
+            height: self.texture_size[1]
             halign:"center"
         
         MDSeparator:
@@ -54,8 +55,9 @@
         radius: [15]
         md_bg_color: app.theme_cls.primary_light
         MDLabel:
-            id:matchlbl
-            adaptive_height:True
+            id:matchlbl 
+            size_hint_y: None
+            height: self.texture_size[1]
             halign:"center"
         
         MDSeparator:
