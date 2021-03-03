@@ -1,5 +1,8 @@
 #:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
 
+#:import Scores AnalysisScreen.Scores
+#:import General AnalysisScreen.General
+#:import Tab AnalysisScreen.Tab
 
 <AnalyzeScreen>:
     name:"analyzeScreen"
@@ -9,7 +12,7 @@
         spacing: "5dp"
         MDToolbar:
             title: "Analyze Tabs"
-            adaptive_height: "True"
+            #adaptive_height: "True"
             anchor_title: 'center'
 
         MDTabs:
@@ -35,7 +38,7 @@
         
     MDIconButton:
         icon:"arrow-left"
-        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) - 10
+        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) - 12
 
         on_press:
             root.manager.transition.direction = 'right'

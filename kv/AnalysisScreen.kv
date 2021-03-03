@@ -1,3 +1,8 @@
+#:import Data AnalysisScreen.Data 
+#:import ScoreCardItem AnalysisScreen.ScoreCardItem
+#:import ScoreCardBowlItem  AnalysisScreen.ScoreCardBowlItem
+#:import Scores AnalysisScreen.Scores
+
 <Scores>
     BoxLayout:
         orientation: "vertical"
@@ -25,8 +30,8 @@
         md_bg_color: app.theme_cls.primary_light
 
         MDLabel:
-            id:matchlbl
-            adaptive_height:True
+            id:matchlbl 
+            size: self.texture_size
             halign:"center"
         
         MDSeparator:
