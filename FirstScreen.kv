@@ -1,4 +1,3 @@
-
 <FirstScreen>:
     name:"firstScreen"
     MDBoxLayout:
@@ -18,15 +17,26 @@
                 size_hint_y: None
                
                 OneLineAvatarIconListItem:
-                    on_press:  
+                    on_press:
                         root.manager.transition.direction = 'left'
-                        root.manager.current = 'secondScreen'
+                        root.manager.current = 'analyzeScreen'
 
-                    text:"CSK Vs RCB"
+
+                    text:"CSK vs RCB"
                     ImageLeftWidget:
                         source: "csk1.jpg"
                     ImageRightWidget:
                         source: "rcb1.jpg"       
+                OneLineAvatarIconListItem:
+                    on_press:  
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'analyzeScreen'
+
+                    text:"Testing"
+                    IconLeftWidget:
+                        icon: "plus"
+                    IconRightWidget:
+                        icon: "minus"       
                     
                     
                     
