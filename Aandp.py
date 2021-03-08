@@ -9,7 +9,6 @@ from kivy.uix.gridlayout import GridLayout
 
 from kivymd.uix.tab import MDTabsBase 
 
-from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
 from kivymd.uix.button import MDFillRoundFlatButton, MDRectangleFlatButton
 from kivymd.app import MDApp
 
@@ -144,10 +143,12 @@ class AnalyzeScreen(MDScreen):
     
     
     
+class RoundFlatToggleButton(MDFillRoundFlatButton):
+    pass
 
-
+"""
 class RoundFlatToggleButton(MDFillRoundFlatButton, MDToggleButton):
     def __init__(self, **kwargs):
         self.background_down = MDApp.get_running_app().theme_cls.accent_color
         super().__init__(**kwargs)
-
+"""
