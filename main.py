@@ -15,16 +15,18 @@ from pathlib import Path
 ##File last modified 07-03-21 at 5:14 pm
 
 
-#Window.size = (300,600)
+Window.size = (300,600)
 
-
+"""
 KV_DIR = f"{os.path.dirname(__file__)}/kv/"
 
 for kv_file in os.listdir(KV_DIR):
     with open(os.path.join(KV_DIR, kv_file), encoding="utf-8") as kv:
         print(kv_file)
         Builder.load_string(kv.read())
-
+"""
+Builder.load_file("allmatches.kv")
+Builder.load_file("aandp.kv")
 
           
 class Matches(MDCard):
@@ -32,16 +34,12 @@ class Matches(MDCard):
         sm.transition.direction = 'left'
         sm.current = 'analyzeScreen'
 
-        print("Clicking here")
-
 
 class AllMatches(MDScreen):
     def on_pre_enter(self):
         match1 = Matches()
-        if len(self.ids.matchlist.children) < 1:
-            self.ids.matchlist.add_widget(match1)
-        else:
-            pass
+        self.ids.matchlist.add_widget(match1)
+        
     
 class FirstScreen(MDScreen):
     pass
@@ -57,16 +55,18 @@ class FirstScreen1(MDApp):
     bimagepath = StringProperty()
 
     def build(self):
-        path = os.path.dirname(os.path.abspath(__file__))
+        sm.add_widget(AllMatches(name='allmatches'))
+        sm.add_widget(AnalyzeScreen(name='analyzeScreen'))
+        return sm
+    #below code was in build method
+    """
+    path = os.path.dirname(os.path.abspath(__file__))
         ttfpath = path + "\\ttf\\"
         print("ttfpath ==",ttfpath)
         cimagepath = path + "\\images\\csk.jpg"
         bimagepath = path + "\\images\\rcb.jpg"
         print("imagepath ==",cimagepath)
         print("imagepath ==",bimagepath)
-
-        sm.add_widget(AllMatches(name='allmatches'))
-        sm.add_widget(AnalyzeScreen(name='analyzeScreen'))
-        return sm
+    """
 
 FirstScreen1().run()

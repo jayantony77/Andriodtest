@@ -1,0 +1,202 @@
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+
+<AnalyzeScreen>:
+    name:"analyzeScreen"
+    BoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "5dp"
+        MDToolbar:
+            title: "Analyze Tabs"
+            adaptive_height: "True"
+            anchor_title: 'center'
+            #md_bg_color:128/255, 0, 0, 1
+
+        MDTabs:
+            id:tab 
+            size_hiny_y: None
+            adaptive_height: "True"
+            on_tab_switch: root.on_tab_switch(*args)
+            #background_color: 128/255, 0, 0, 1
+            #md_bg_color: 1, 245/255, 230/255, 1               
+
+            General:
+                id:"General"
+                text: "General" 
+                
+            Scores:
+                id:sc_bat
+                text: "Scores-Batting"
+            Scores:
+                id:sc_bowl
+                text: "Scores-Bowling"
+            Prediction:
+                id:pred
+                text: "Predction"
+        
+        
+    MDIconButton:
+        icon:"arrow-left"
+        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) - 12
+
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'allmatches'        
+
+<General>
+    BoxLayout:
+        orientation: "vertical"
+        padding:"10dp"
+        spacing: "10dp"
+
+        MDRectangleFlatButton:
+            text: "Pitch Report    "
+            halign: "center"
+            #md_bg_color:128/255, 0, 0, 1
+           
+        MDRectangleFlatButton:
+            text: "Player Analysis"
+            halign: "center"
+            #md_bg_color:128/255, 0, 0, 1
+            
+        MDRectangleFlatButton:
+            text: "Miscellenous    "
+            halign: "center"
+            #md_bg_color:128/255, 0, 0, 1
+         
+        Widget:
+            size_hint_y:None
+            height: "100dp"
+
+<Scores> 
+    BoxLayout:
+        orientation: "vertical"
+        padding:"10dp"
+        ScrollView:
+            MDList:
+                id:scorelist
+                    
+
+<Data>
+<ScoreCardItem>
+    id:scorecarditem
+    size_hint_y:None
+    height:"140dp"
+    elevation:20
+    adaptive_height:True
+        
+    MDCard:
+        orientation: "vertical"
+        border_radius: 20
+        radius: [15]
+        #focus_behavior: True
+        #ripple_behavior: True
+        #md_bg_color: app.theme_cls.primary_light
+        #md_bg_color: 1, 245/255, 230/255, 1
+
+        DataLabel:
+            id:matchlbl 
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign:"center"
+        
+        MDSeparator:
+            height: "1dp"
+        Data:
+            id:data
+            cols:6
+            cols_minimum: {0:130,1:20, 2:30, 3:20, 4:20, 5:20, 6:20}
+
+<DataLabel>
+    font_name: "LibreBaskerville-Regular.ttf"
+    font_size:"15sp"
+    theme_text_color: "Custom" 
+    #text_color: 128/255, 0, 0, 1
+    
+    
+<ScoreCardBowlItem>
+    id:scorecarditem
+    size_hint_y:None
+    height:"140dp"
+    elevation:20
+    adaptive_height:True
+        
+    MDCard:
+        orientation: "vertical"
+        border_radius: 20
+        radius: [15]
+        #md_bg_color: 1, 245/255, 230/255, 1
+
+        DataLabel:
+            id:matchlbl 
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign:"center"
+        
+        MDSeparator:
+            height: "1dp"
+        Data:
+            id:data
+            cols:6
+            cols_minimum: {0:100,1:10, 2:10, 3:10, 4:10, 5:50}
+            
+
+
+<Prediction>
+    BoxLayout:
+        orientation: "vertical"
+        padding:"10dp"
+        spacing:"10dp"
+        adaptive_size: "True"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 1
+            Line:
+                width: 1
+                rectangle: self.x+10, self.y+10, self.width-20, self.height-20
+       
+        BoxLayout:
+            orientation: "vertical"
+            padding: "5dp"
+            spacing: "5dp"
+            adaptive_size: "True"
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            size_hint: 1,0.8            
+        
+            Image:
+                id:img
+                source: "battingheavy.jpg"
+                size_hint:1,1
+                strech:True
+            
+        BoxLayout:
+            orientation: "vertical"
+            padding:"5dp"
+            spacing:"5dp"
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            size_hint: 0.9,0.3
+            
+            RoundFlatToggleButton:
+                text: "Head to Head"
+                adaptive_size:True
+                group: "z"
+                pos_hint: {"center_x":0.5}
+                state: "down"
+                on_press: root.on_press("bat")
+
+            RoundFlatToggleButton:
+                text: "Small League"
+                adaptive_size:True
+                group: "z"
+                pos_hint: {"center_x":0.5}
+                on_press: root.on_press("bal")
+
+                
+            RoundFlatToggleButton:
+                text: "Grand League"
+                adaptive_size:True
+                group: "z"
+                pos_hint: {"center_x":0.5}
+                on_press: root.on_press("bowl")
