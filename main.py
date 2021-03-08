@@ -6,6 +6,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivymd.uix.card import MDCard
 from Aandp import AnalyzeScreen
 from kivy.properties import StringProperty
+from kivy.uix.relativelayout import RelativeLayout
 
 import csv
 import os
@@ -15,30 +16,35 @@ from pathlib import Path
 ##File last modified 08-03-21 at 12:43 pm
 
 
-Window.size = (300,600)
+#Window.size = (300,600)
 
 """
 KV_DIR = f"{os.path.dirname(__file__)}/kv/"
 
 for kv_file in os.listdir(KV_DIR):
     with open(os.path.join(KV_DIR, kv_file), encoding="utf-8") as kv:
-        print(kv_file)
         Builder.load_string(kv.read())
 """
-Builder.load_file("allmatches.kv")
-Builder.load_file("aandp.kv")
+path = os.path.dirname(os.path.abspath(__file__))
+     
+path = path + '/kv/'
+
+Builder.load_file(path+"allmatches.kv")
+Builder.load_file(path+"aandp.kv")
 
           
-class Matches(MDCard):
+class MatchesItem(RelativeLayout):
     def show_matches(self):
         sm.transition.direction = 'left'
         sm.current = 'analyzeScreen'
 
 
+
 class AllMatches(MDScreen):
     def on_pre_enter(self):
-        match1 = Matches()
-        self.ids.matchlist.add_widget(match1)
+        match1 = MatchesItem()
+        if len(self.ids.matchlist.children) < 1:
+            self.ids.matchlist.add_widget(match1)
         
     
 class FirstScreen(MDScreen):

@@ -10,60 +10,52 @@
             title:"Matches"
             anchor_title:"center"
             pos_hint: {"top":1}
-            
-
 
         ScrollView:
             MDList:
                 id:matchlist
-                height:"140dp"
-                
-                
 <BlackLabel@MDLabel>
     theme_text_color: "Custom"
     text_color: 0, 0, 0, 1
-    #font_name: "LibreBaskerville-Regular.ttf"
-    
+    font_name: "LibreBaskerville-Regular.ttf"
 
-<Matches>
-    id: card
-    orientation: "vertical"
-    size_hint: .9, None
-    height: self.minimum_height
-    ripple_behavior: True
-    border_radius: 20
-    radius: [15]
-    #md_bg_color: 1, 245/255, 230/255, 1
-    on_release: root.show_matches()
-    BoxLayout:
-        id: box
-        orientation:"vertical"
-        size_hint_y:None
-       
+<MatchesItem>
+    id:matchesitem
+    size_hint_y:None
+    height:"100dp"
+    elevation:20
+    adaptive_height:True
+    MDCard:
+        orientation: "vertical"
+        border_radius: 20
+        radius: [15]
+        ripple_behavior: True
+        on_release: root.show_matches()
         BoxLayout:
+            id: box
             orientation:"vertical"
-            size_hint: 1,0.22
-            pos_hint:{"center_x":0.5,"center_y":0.5}
-            padding:"5dp"
-            
-            BlackLabel:
-                id:matchlbl
-                text:"[u]IPL 3rd match CSK vs RCB[u]"
-                markup:True
-                font_size:"12sp"
-                bold:True
-                halign:"center"
+            size_hint_y:None
         
-        BoxLayout:
-            orientation:"vertical"
-            
             BoxLayout:
+                orientation:"vertical"
+                size_hint: 1,0.22
+                padding:"5dp"
+    
+                BlackLabel:
+                    id:matchlbl
+                    text:"[u]IPL 3rd match CSK vs RCB[u]"
+                    markup:True
+                    font_size:"12sp"
+                    bold:True
+                    halign:"center"
+                        
+            BoxLayout:
+                size_hint: 1,0.75
+                
                 Image:
                     source:"csk.jpg"
                 BoxLayout:
                     orientation:"vertical"
-                    Widget:
-                        size:0.05,0.05
                     BlackLabel:
                         text:"VS"
                         font_size:"25sp"
@@ -74,6 +66,4 @@
                         font_size:"12sp"
                         halign:"center"  
                 Image:
-                    #source:"D:/Cricket/KivyMD-master/demos/Andriod/RCB.jpg"
                     source: "rcb.jpg"
-                    #source:app.bimagepath
