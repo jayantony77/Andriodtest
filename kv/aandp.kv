@@ -2,24 +2,21 @@
 
 <AnalyzeScreen>:
     name:"analyzeScreen"
-    BoxLayout:
+    MDBoxLayout:
         orientation: "vertical"
-        padding: "10dp"
-        spacing: "5dp"
+        spacing: "12dp"
         MDToolbar:
             title: "Analyze Tabs"
             adaptive_height: "True"
             anchor_title: 'center'
-            md_bg_color:128/255, 0, 0, 1
-
-
+            
         MDTabs:
             id:tab 
             size_hiny_y: None
             adaptive_height: "True"
             on_tab_switch: root.on_tab_switch(*args)
-            background_color: 128/255, 0, 0, 1
-            md_bg_color: 1, 245/255, 230/255, 1               
+            #background_color: 128/255, 0, 0, 1
+            #md_bg_color: 1, 245/255, 230/255, 1               
 
             General:
                 id:"General"
@@ -33,12 +30,12 @@
                 text: "Scores-Bowling"
             Prediction:
                 id:pred
-                text: "Predction"
+                text: "Prediction"
         
         
     MDIconButton:
         icon:"arrow-left"
-        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) - 12
+        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) 
 
         on_press:
             root.manager.transition.direction = 'right'
@@ -53,17 +50,17 @@
         MDRectangleFlatButton:
             text: "Pitch Report    "
             halign: "center"
-            md_bg_color:128/255, 0, 0, 1
+            #md_bg_color:128/255, 0, 0, 1
            
         MDRectangleFlatButton:
             text: "Player Analysis"
             halign: "center"
-            md_bg_color:128/255, 0, 0, 1
+            #md_bg_color:128/255, 0, 0, 1
             
         MDRectangleFlatButton:
             text: "Miscellenous    "
             halign: "center"
-            md_bg_color:128/255, 0, 0, 1
+            #md_bg_color:128/255, 0, 0, 1
          
         Widget:
             size_hint_y:None
@@ -93,7 +90,7 @@
         #focus_behavior: True
         #ripple_behavior: True
         #md_bg_color: app.theme_cls.primary_light
-        md_bg_color: 1, 245/255, 230/255, 1
+        #md_bg_color: 1, 245/255, 230/255, 1
 
         DataLabel:
             id:matchlbl 
@@ -112,7 +109,7 @@
     font_name: "LibreBaskerville-Regular.ttf"
     font_size:"15sp"
     theme_text_color: "Custom" 
-    text_color: 128/255, 0, 0, 1
+    #text_color: 128/255, 0, 0, 1
     
     
 <ScoreCardBowlItem>
@@ -126,7 +123,7 @@
         orientation: "vertical"
         border_radius: 20
         radius: [15]
-        md_bg_color: 1, 245/255, 230/255, 1
+        #md_bg_color: 1, 245/255, 230/255, 1
 
         DataLabel:
             id:matchlbl 
@@ -153,7 +150,7 @@
 
         canvas.before:
             Color:
-                rgba: 128/255, 0, 0, 1
+                rgba: 0, 1, 0, 1
             Line:
                 width: 1
                 rectangle: self.x+10, self.y+10, self.width-20, self.height-20
@@ -182,15 +179,12 @@
             RoundFlatToggleButton:
                 text: "Head to Head"
                 adaptive_size:True
-                group: "z"
                 pos_hint: {"center_x":0.5}
-                state: "down"
                 on_press: root.on_press("bat")
 
             RoundFlatToggleButton:
                 text: "Small League"
                 adaptive_size:True
-                group: "z"
                 pos_hint: {"center_x":0.5}
                 on_press: root.on_press("bal")
 
@@ -198,6 +192,5 @@
             RoundFlatToggleButton:
                 text: "Grand League"
                 adaptive_size:True
-                group: "z"
                 pos_hint: {"center_x":0.5}
                 on_press: root.on_press("bowl")
