@@ -3,49 +3,43 @@ from kivy.lang.builder import Builder
 from kivy.core.window import Window
 from kivymd.uix.screen import MDScreen
 from kivy.uix.screenmanager import ScreenManager
+from kivy.core.window import Window
 from kivymd.uix.card import MDCard
-from Aandp import AnalyzeScreen
 from kivy.properties import StringProperty
 from kivy.uix.relativelayout import RelativeLayout
+from analyzescreen import AnalyzeScreen, AScreen, BScreen
+from scoresscreen import ScoresScreen
+from scoresscreenbowl import ScoresScreenBowl
+import globalvar
 
 import csv
 import os
 import sys
 from pathlib import Path
 
-##File last modified 08-03-21 at 12:43 pm
+
+Window.size = 300, 600
 
 
-#Window.size = (300,600)
-
-"""
-KV_DIR = f"{os.path.dirname(__file__)}/kv/"
-
-for kv_file in os.listdir(KV_DIR):
-    with open(os.path.join(KV_DIR, kv_file), encoding="utf-8") as kv:
-        Builder.load_string(kv.read())
-"""
 path = os.path.dirname(os.path.abspath(__file__))
      
 path = path + '/kv/'
 
 Builder.load_file(path+"allmatches.kv")
-Builder.load_file(path+"aandp.kv")
+Builder.load_file(path+"analyzescreen.kv")
+Builder.load_file(path+"scoresscreen.kv")
+Builder.load_file(path+"scoresscreenbowl.kv")
 
-          
 class MatchesItem(RelativeLayout):
     def show_matches(self):
         sm.transition.direction = 'left'
         sm.current = 'analyzeScreen'
 
-
-
 class AllMatches(MDScreen):
     def on_pre_enter(self):
-        match1 = MatchesItem()
+        match = MatchesItem()
         if len(self.ids.matchlist.children) < 1:
-            self.ids.matchlist.add_widget(match1)
-        
+            self.ids.matchlist.add_widget(match)
     
 class FirstScreen(MDScreen):
     pass
@@ -63,7 +57,39 @@ class FirstScreen1(MDApp):
     def build(self):
         sm.add_widget(AllMatches(name='allmatches'))
         sm.add_widget(AnalyzeScreen(name='analyzeScreen'))
+        sm.add_widget(AScreen(name='ascreen'))
+        sm.add_widget(BScreen(name='bscreen'))
+        sm.add_widget(ScoresScreen(name='scoresScreen'))
+        sm.add_widget(ScoresScreenBowl(name='scoresScreenBowl'))
+        print(sm.screens)
         return sm
+
+    def prevbatting1(self):
+        sm.screens[4].ids.scorestb.cluetxt="CSK-bat"
+        sm.transition.direction = 'left'
+        sm.current = 'scoresScreen'
+        
+    def prevbowling1(self):
+        sm.screens[5].ids.scorestbb.cluetxt="CSK-bowl"
+        sm.transition.direction = 'left'
+        sm.current = 'scoresScreenBowl'
+    
+    def prevbatting2(self):
+        sm.screens[4].ids.scorestb.cluetxt="RCB-bat"
+        sm.transition.direction = 'left'
+        sm.current = 'scoresScreen'
+        
+    def prevbowling2(self):
+        sm.screens[5].ids.scorestbb.cluetxt="RCB-bowl"
+        sm.transition.direction = 'left'
+        sm.current = 'scoresScreenBowl'
+        
+
+    def switch_analyze(self):
+        sm.screens[1].ids.anal.matchinfo="CSK-RCB"
+        sm.transition.direction = 'left'
+        sm.current = 'analyzeScreen'
+    
     #below code was in build method
     """
     path = os.path.dirname(os.path.abspath(__file__))
@@ -74,5 +100,4 @@ class FirstScreen1(MDApp):
         print("imagepath ==",cimagepath)
         print("imagepath ==",bimagepath)
     """
-
 FirstScreen1().run()

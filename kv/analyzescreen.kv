@@ -1,0 +1,177 @@
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+
+
+<AnalyzeScreen>:
+    name:"analyzescreen"
+    MDBoxLayout:
+        orientation: "vertical"
+        #spacing: "12dp"
+        MDToolbar:
+            id:anal
+            title: "Analyze Tabs"
+            anchor_title: 'center'
+            pos_hint: {"top":1}
+            matchinfo:
+   
+        MDBottomNavigation:
+            panel_color: 51/255, 204/255, 1, 1
+
+            MDBottomNavigationItem:
+                name: "Analyze Screen"
+                text: "Match Center"
+                icon: 'cricket'
+
+                AScreen:
+                    id: ascr
+
+            MDBottomNavigationItem:
+                name: 'Analysis'
+                text: 'Analysis'
+                #icon: 'language-cpp'
+                icon: 'animation-play'
+                
+                BScreen:
+                    id:bscr
+
+
+            MDBottomNavigationItem:
+                name: 'Prediction'
+                text: 'Prediction'
+                #icon: 'language-javascript'
+                icon: 'currency-usd'
+                
+                CScreen:
+                    id:cscr
+    MDIconButton:
+        icon:"arrow-left"
+        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) 
+
+        on_press: 
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'allmatches'        
+
+
+<AScreen>:
+    name:"ascreen"
+    ScrollView:
+
+        MDBoxLayout:
+            orientation: "vertical"
+            adaptive_height: True
+            CodeInput:
+                id: code_input
+                #text: "display text here"
+                style_name: "monokai" if app.theme_cls.theme_style == "Dark" else "colorful"
+                size_hint_y: None
+                height: self.minimum_height
+                #background_normal: f"{images_path}transparent.png"
+                #background_normal: "transparent.png"
+                readonly: True
+                on_focus: self.focus = False
+<BScreen>:
+    name:"bscreen"
+    MDBoxLayout:
+        orientation:"vertical" 
+        spacing: "12dp"
+        ScrollView:
+            MDList:
+                id:matcard
+
+<CScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding:"10dp"
+        spacing:"10dp"
+        adaptive_size: "True"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 1
+            Line:
+                width: 1
+                rectangle: self.x+10, self.y+10, self.width-20, self.height-20
+       
+        BoxLayout:
+            orientation: "vertical"
+            padding: "5dp"
+            spacing: "5dp"
+            adaptive_size: "True"
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            size_hint: 1,0.8            
+        
+            Image:
+                id:img
+                source: "battingheavy.jpg"
+                size_hint:1,1
+                strech:True
+            
+        BoxLayout:
+            orientation: "vertical"
+            padding:"5dp"
+            spacing:"5dp"
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            size_hint: 0.9,0.3
+            
+            RoundFlatToggleButton:
+                text: "Head to Head"
+                adaptive_size:True
+                pos_hint: {"center_x":0.5}
+                on_press: root.on_press("bat")
+
+            RoundFlatToggleButton:
+                text: "Small League"
+                adaptive_size:True
+                pos_hint: {"center_x":0.5}
+                on_press: root.on_press("bal")
+
+                
+            RoundFlatToggleButton:
+                text: "Grand League"
+                adaptive_size:True
+                pos_hint: {"center_x":0.5}
+                on_press: root.on_press("bowl")        
+
+<MatchCard>
+    orientation:"vertical"
+    border_radius: 20
+    radius: [15]
+    size:"280dp","180dp"
+    padding:"10dp"
+    MDLabel:
+        id:match1but
+
+    MDFlatButton:
+        id:match1but_bat
+        halign:"center"
+        on_press: app.prevbatting1()
+            
+    MDSeparator:
+        width:"2dp"
+    MDFlatButton:
+        id:match1but_bowl
+        halign:"center"
+        on_press:app.prevbowling1()
+        
+<MatchCard1>
+    orientation:"vertical"
+    border_radius: 20
+    radius: [15]
+    size:"280dp","180dp"
+    padding:"10dp"
+    MDLabel:
+        id:match2but
+        
+
+    MDFlatButton:
+        id:match2but_bat
+        halign:"center"
+        on_press: app.prevbatting2()
+            
+    MDSeparator:
+        width:"2dp"
+    MDFlatButton:
+        id:match2but_bowl
+        halign:"center"
+        on_press:app.prevbowling2()
+

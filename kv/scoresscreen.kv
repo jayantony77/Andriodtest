@@ -1,0 +1,71 @@
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+
+<ScoresScreen>:
+    name:"scoresScreen"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "12dp"
+        MDToolbar:
+            id:scorestb
+            adaptive_height: "True"
+            anchor_title: 'center'
+            cluetxt:
+
+        BoxLayout:
+            orientation: "vertical"
+            padding:"10dp"
+            MDLabel:
+                text:"Previous Scores of IPL teams,"
+                adaptive_size:True
+            MDLabel:
+                text:"will be updated as IPL Progress"
+                adaptive_size:True
+
+
+            ScrollView:
+                MDList:
+                    id:scorelist
+            
+        
+    MDIconButton:
+        icon:"arrow-left"
+        y: (root.height - self.height / 2 - STANDARD_INCREMENT / 2) 
+
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'analyzeScreen'        
+                
+<ScoreCardItem>
+    id:scorecarditem
+    orientation: "vertical"
+    #height:"160dp"
+    size: "280dp", "160dp"
+    elevation:20
+    adaptive_height:True
+    border_radius: 20
+    radius: [15]
+    pos_hint:{"center_x":0.5,"center_y":0.5}
+    padding:"3dp"
+    md_bg_color: 1, 245/255, 230/255, 1               
+    canvas.before:
+        Color:
+            rgba: 1, 0, 0, 1
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+<DataLabel>
+<DataBat>
+    id:data
+    cols:6
+    size_hint:1,1
+    cols_minimum: {0:130, 1:10, 2:30, 3:10, 4:10,5:10}
+    row_default_height: 20
+    row_force_default: True
+
+<DataBowl>
+    id:data
+    cols:6
+    size_hint:1,1
+    row_default_height: 20
+    row_force_default: True
+    cols_minimum: {0:130, 1:10, 2:20, 3:10, 4:10,5:40}
